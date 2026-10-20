@@ -1,0 +1,54 @@
+﻿<Page x:Class="UP01_Shirokova_PhotoRental.Pages.ReportPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:UP01_Shirokova_PhotoRental.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Экспорт отчетов"
+      Background="{DynamicResource WindowBackgroundBrush}">
+
+    <Grid>
+        <Border Width="460"
+                Padding="35"
+                CornerRadius="15"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="{DynamicResource PanelBackgroundBrush}">
+
+            <StackPanel>
+                <TextBlock Text="Экспорт отчётов"
+                           FontSize="26"
+                           FontWeight="Bold"
+                           TextAlignment="Center"
+                           Margin="0,0,0,15"/>
+
+                <TextBlock
+                    Text="Выгрузка данных об аренде техники"
+                    TextAlignment="Center"
+                    Margin="0,0,0,25"/>
+
+                <Button Content="Экспорт в Word (.docx)"
+                        Height="43"
+                        Click="WordButton_Click"
+                        Margin="5,6"/>
+
+                <Button Content="Экспорт в Excel (.xlsx)"
+                        Height="43"
+                        Click="ExcelButton_Click"
+                        Margin="5,6"/>
+
+                <Button Content="Экспорт в PDF (.pdf)"
+                        Height="43"
+                        Click="PdfButton_Click"
+                        Margin="5,6"/>
+
+                <Button Content="Назад"
+                        Height="40"
+                        Click="BackButton_Click"
+                        Margin="5,20,5,0"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Page>

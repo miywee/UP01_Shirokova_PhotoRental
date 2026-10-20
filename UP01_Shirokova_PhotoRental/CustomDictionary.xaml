@@ -1,0 +1,117 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <SolidColorBrush x:Key="WindowBackgroundBrush"
+                     Color="#142B30"/>
+
+    <SolidColorBrush x:Key="PanelBackgroundBrush"
+                     Color="#1F3E42"/>
+
+    <SolidColorBrush x:Key="AccentBrush"
+                     Color="#47BFB0"/>
+
+    <SolidColorBrush x:Key="TextBrush"
+                     Color="#F0FBF8"/>
+
+    <SolidColorBrush x:Key="InputBackgroundBrush"
+                     Color="#2F4D52"/>
+
+    <SolidColorBrush x:Key="InputBorderBrush"
+                     Color="#648B89"/>
+
+
+    <Style TargetType="{x:Type Button}">
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="Padding" Value="10,5"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="FontFamily" Value="Open Sans"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Background"
+                Value="{DynamicResource AccentBrush}"/>
+        <Setter Property="Foreground" Value="#10292B"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Cursor" Value="Hand"/>
+    </Style>
+
+
+    <Style TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily" Value="Open Sans"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Foreground"
+                Value="{DynamicResource TextBrush}"/>
+    </Style>
+
+
+    <Style TargetType="{x:Type TextBox}">
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="Padding" Value="8"/>
+        <Setter Property="FontFamily" Value="Open Sans"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Background"
+                Value="{DynamicResource InputBackgroundBrush}"/>
+        <Setter Property="Foreground"
+                Value="{DynamicResource TextBrush}"/>
+        <Setter Property="BorderBrush"
+                Value="{DynamicResource InputBorderBrush}"/>
+    </Style>
+
+
+    <Style TargetType="{x:Type PasswordBox}">
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="Padding" Value="8"/>
+        <Setter Property="FontFamily" Value="Open Sans"/>
+        <Setter Property="Background"
+                Value="{DynamicResource InputBackgroundBrush}"/>
+        <Setter Property="Foreground"
+                Value="{DynamicResource TextBrush}"/>
+    </Style>
+
+
+    <Style TargetType="{x:Type Label}">
+        <Setter Property="FontFamily" Value="Open Sans"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Foreground"
+                Value="{DynamicResource TextBrush}"/>
+    </Style>
+
+
+    <Style TargetType="{x:Type ComboBox}">
+        <Setter Property="Height" Value="35"/>
+        <Setter Property="FontFamily" Value="Open Sans"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="Background"
+                Value="{DynamicResource InputBackgroundBrush}"/>
+        <Setter Property="Foreground"
+                Value="{DynamicResource TextBrush}"/>
+    </Style>
+
+    <Style TargetType="{x:Type DataGrid}">
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="BorderBrush" Value="#B0B0B0"/>
+        <Setter Property="GridLinesVisibility" Value="All"/>
+        <Setter Property="RowBackground" Value="White"/>
+        <Setter Property="AlternatingRowBackground" Value="#F3F3F3"/>
+        <Setter Property="HeadersVisibility" Value="Column"/>
+    </Style>
+
+    <Style TargetType="{x:Type DataGridCell}">
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Background" Value="White"/>
+        <Setter Property="BorderBrush" Value="#D0D0D0"/>
+    </Style>
+
+    <Style TargetType="{x:Type DataGridColumnHeader}">
+        <Setter Property="Background" Value="#47BFB0"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <Style TargetType="{x:Type ComboBoxItem}">
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Background" Value="White"/>
+    </Style>
+
+</ResourceDictionary>

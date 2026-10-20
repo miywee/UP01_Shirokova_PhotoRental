@@ -1,0 +1,59 @@
+﻿<Window x:Class="UP01_Shirokova_PhotoRental.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UP01_Shirokova_PhotoRental"
+        mc:Ignorable="d"
+        Title="Аренда" Height="650" Width="1000"
+        Background="{DynamicResource WindowBackgroundBrush}">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="45"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Background="{DynamicResource PanelBackgroundBrush}">
+            <Button Content="Назад"
+                    Width="100"
+                    Height="30"
+                    Margin="10,0,0,0"
+                    HorizontalAlignment="Left"
+                    Click="BackButton_Click"/>
+
+            <TextBlock x:Name="PageTitle"
+                       Text="PhotoRent"
+                       FontSize="18"
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"/>
+
+
+            <Button x:Name="ThemeButton"
+                       Content="Тёмная тема"
+                       Width="135"
+                       Height="35"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       Margin="0,0,10,0"
+                       ToolTip="Изменить оформление приложения"
+                       Click="ThemeButton_Click"/>
+
+        </Grid>
+
+        <Frame x:Name="MainFrame"
+               Grid.Row="1"
+               NavigationUIVisibility="Hidden"
+               Navigated="MainFrame_Navigated"/>
+
+        <Grid Grid.Row="2" Background="{DynamicResource PanelBackgroundBrush}">
+            <TextBlock x:Name="DateTimeNow"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       Margin="0,0,15,0"
+                       Foreground="{DynamicResource TextBrush}"
+                       FontSize="13"/>
+        </Grid>
+    </Grid>
+</Window>

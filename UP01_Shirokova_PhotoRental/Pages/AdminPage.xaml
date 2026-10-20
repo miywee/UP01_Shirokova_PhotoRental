@@ -1,0 +1,168 @@
+﻿<Page x:Class="UP01_Shirokova_PhotoRental.Pages.AdminPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:UP01_Shirokova_PhotoRental.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Панель администратора"
+      Background="{DynamicResource WindowBackgroundBrush}"
+      Loaded="Page_Loaded">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Text="Управление каталогом техники"
+                   FontSize="24"
+                   FontWeight="Bold"
+                   Margin="0,0,0,15"/>
+
+        <WrapPanel Grid.Row="1" Margin="0,0,0,15">
+
+            <StackPanel Width="250" Margin="0,0,15,0">
+                <TextBlock Text="Поиск техники"/>
+                <TextBox x:Name="SearchTextBox"
+                         ToolTip="Поиск по названию и категории"
+                         TextChanged="FilterChanged"/>
+            </StackPanel>
+
+            <StackPanel Width="180">
+                <TextBlock Text="Доступность"/>
+
+
+
+                <ComboBox x:Name="AvailabilityComboBox"
+          Background="White"
+          Foreground="Black"
+          SelectionChanged="FilterChanged">
+
+                    <ComboBoxItem>
+                        <TextBlock Text="Все"
+                   Style="{x:Null}"
+                   Foreground="Black"/>
+                    </ComboBoxItem>
+
+                    <ComboBoxItem>
+                        <TextBlock Text="Доступна"
+                   Style="{x:Null}"
+                   Foreground="Black"/>
+                    </ComboBoxItem>
+
+                    <ComboBoxItem>
+                        <TextBlock Text="Недоступна"
+                   Style="{x:Null}"
+                   Foreground="Black"/>
+                    </ComboBoxItem>
+
+                </ComboBox>
+
+
+
+            </StackPanel>
+
+        </WrapPanel>
+
+        <DataGrid x:Name="EquipmentGrid"
+                  Grid.Row="2"
+                  AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  CanUserSortColumns="True"
+                  SelectionMode="Single">
+
+            <DataGrid.Columns>
+
+                <DataGridTextColumn Header="ID"
+                                    Binding="{Binding ID}"
+                                    IsReadOnly="True"
+                                    Width="50"/>
+
+                <DataGridTextColumn Header="Название"
+                                    Binding="{Binding Name}"
+                                    Width="2*"/>
+
+                <DataGridTextColumn Header="Категория"
+                                    Binding="{Binding Category}"
+                                    Width="*"/>
+
+                <DataGridTextColumn Header="Описание"
+                                    Binding="{Binding Description}"
+                                    Width="2*"/>
+
+                <DataGridTextColumn Header="Цена за день"
+                                    Binding="{Binding PricePerDay}"
+                                    Width="*"/>
+
+                <DataGridCheckBoxColumn Header="Доступна"
+                                        Binding="{Binding IsAvailable}"
+                                        Width="90"/>
+
+                <DataGridTextColumn Header="Владелец ID"
+                                    Binding="{Binding OwnerID}"
+                                    IsReadOnly="True"
+                                    Width="90"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <WrapPanel Grid.Row="3"
+                   Margin="0,15,0,0"
+                   HorizontalAlignment="Center">
+
+            <Button Content="Добавить"
+                    Width="125"
+                    Click="AddButton_Click"/>
+
+            <Button Content="Сохранить"
+                    Width="125"
+                    Click="SaveButton_Click"/>
+
+            <Button Content="Удалить"
+                    Width="125"
+                    Click="DeleteButton_Click"/>
+
+            <Button Content="Обновить"
+                    Width="125"
+                    Click="RefreshButton_Click"/>
+
+            <Button Content="Каталог"
+                    Width="125"
+                    Click="CatalogButton_Click"/>
+
+
+            <Button Content="Диаграмма"
+                    Width="125"
+                    ToolTip="Просмотр статистики аренды"
+                    Click="DiagramButton_Click"/>
+
+
+            <Button Content="Сменить пароль"
+                    Width="125"
+                    Click="ChangePassword_Click"/>
+
+            <Button Content="Выход"
+                    Width="125"
+                    Click="LogoutButton_Click"/>
+
+
+            <Button Content="Экспорт отчётов"
+                    Width="140"
+                    ToolTip="Создать отчёт Word, Excel или PDF"
+                    Click="ReportButton_Click"/>
+
+            <Button Content="Заявки"
+                    Width="125"
+                    ToolTip="Управление заявками на аренду"
+                    Click="RentalsButton_Click"/>
+
+
+        </WrapPanel>
+    </Grid>
+</Page>
