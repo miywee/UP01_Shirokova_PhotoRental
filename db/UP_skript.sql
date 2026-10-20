@@ -1,0 +1,243 @@
+USE [master]
+GO
+/****** Объект:  Database [DB_Shirokova_PhotoRental]    Дата создания скрипта: 20.10.2026 9:40:12 ******/ 
+CREATE DATABASE [DB_Shirokova_PhotoRental]
+ CONTAINMENT = NONE
+ ON  PRIMARY 
+( NAME = N'DB_Shirokova_PhotoRental', FILENAME = N'C:\Users\localboss\DB_Shirokova_PhotoRental.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
+ LOG ON 
+( NAME = N'DB_Shirokova_PhotoRental_log', FILENAME = N'C:\Users\localboss\DB_Shirokova_PhotoRental_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
+ WITH CATALOG_COLLATION = DATABASE_DEFAULT, LEDGER = OFF
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET COMPATIBILITY_LEVEL = 170
+GO
+IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
+begin
+EXEC [DB_Shirokova_PhotoRental].[dbo].[sp_fulltext_database] @action = 'enable'
+end
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET ANSI_NULL_DEFAULT OFF 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET ANSI_NULLS OFF 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET ANSI_PADDING OFF 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET ANSI_WARNINGS OFF 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET ARITHABORT OFF 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET AUTO_CLOSE ON 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET AUTO_SHRINK OFF 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET AUTO_UPDATE_STATISTICS ON 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET CURSOR_CLOSE_ON_COMMIT OFF 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET CURSOR_DEFAULT  GLOBAL 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET CONCAT_NULL_YIELDS_NULL OFF 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET NUMERIC_ROUNDABORT OFF 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET QUOTED_IDENTIFIER OFF 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET RECURSIVE_TRIGGERS OFF 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET  ENABLE_BROKER 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET AUTO_UPDATE_STATISTICS_ASYNC OFF 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET DATE_CORRELATION_OPTIMIZATION OFF 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET TRUSTWORTHY OFF 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET ALLOW_SNAPSHOT_ISOLATION OFF 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET PARAMETERIZATION SIMPLE 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET READ_COMMITTED_SNAPSHOT OFF 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET HONOR_BROKER_PRIORITY OFF 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET RECOVERY SIMPLE 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET  MULTI_USER 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET PAGE_VERIFY CHECKSUM  
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET DB_CHAINING OFF 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET FILESTREAM( NON_TRANSACTED_ACCESS = OFF ) 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET TARGET_RECOVERY_TIME = 60 SECONDS 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET DELAYED_DURABILITY = DISABLED 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET OPTIMIZED_LOCKING = OFF 
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET ACCELERATED_DATABASE_RECOVERY = OFF  
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET QUERY_STORE = ON
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET QUERY_STORE (OPERATION_MODE = READ_WRITE, CLEANUP_POLICY = (STALE_QUERY_THRESHOLD_DAYS = 30), DATA_FLUSH_INTERVAL_SECONDS = 900, INTERVAL_LENGTH_MINUTES = 60, MAX_STORAGE_SIZE_MB = 1000, QUERY_CAPTURE_MODE = AUTO, SIZE_BASED_CLEANUP_MODE = AUTO, MAX_PLANS_PER_QUERY = 200, WAIT_STATS_CAPTURE_MODE = ON)
+GO
+USE [DB_Shirokova_PhotoRental]
+GO
+/****** Объект:  Table [dbo].[Equipment]    Дата создания скрипта: 20.10.2026 9:40:12 ******/ 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Equipment](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[OwnerID] [int] NOT NULL,
+	[Name] [nvarchar](150) NOT NULL,
+	[Category] [nvarchar](80) NOT NULL,
+	[Description] [nvarchar](1000) NULL,
+	[PricePerDay] [decimal](10, 2) NOT NULL,
+	[IsAvailable] [bit] NOT NULL,
+	[PhotoPath] [nvarchar](260) NULL,
+ CONSTRAINT [PK_Equipment] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Объект:  Table [dbo].[Rentals]    Дата создания скрипта: 20.10.2026 9:40:12 ******/ 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Rentals](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[EquipmentID] [int] NOT NULL,
+	[RenterID] [int] NOT NULL,
+	[StartDate] [date] NOT NULL,
+	[EndDate] [date] NOT NULL,
+	[TotalPrice] [decimal](12, 2) NOT NULL,
+	[Status] [nvarchar](20) NOT NULL,
+	[CreatedAt] [datetime] NOT NULL,
+ CONSTRAINT [PK_Rentals] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Объект:  Table [dbo].[Users]    Дата создания скрипта: 20.10.2026 9:40:12 ******/ 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Users](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[Login] [nvarchar](80) NOT NULL,
+	[PasswordHash] [nvarchar](255) NOT NULL,
+	[Role] [nvarchar](20) NOT NULL,
+	[FIO] [nvarchar](150) NOT NULL,
+	[PhotoPath] [nvarchar](260) NULL,
+ CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY],
+ CONSTRAINT [UQ_Users_Login] UNIQUE NONCLUSTERED 
+(
+	[Login] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Объект:  Index [IX_Equipment_Category]    Дата создания скрипта: 20.10.2026 9:40:13 ******/ 
+CREATE NONCLUSTERED INDEX [IX_Equipment_Category] ON [dbo].[Equipment]
+(
+	[Category] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Объект:  Index [IX_Equipment_OwnerID]    Дата создания скрипта: 20.10.2026 9:40:13 ******/ 
+CREATE NONCLUSTERED INDEX [IX_Equipment_OwnerID] ON [dbo].[Equipment]
+(
+	[OwnerID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Объект:  Index [IX_Rentals_EquipmentID]    Дата создания скрипта: 20.10.2026 9:40:13 ******/ 
+CREATE NONCLUSTERED INDEX [IX_Rentals_EquipmentID] ON [dbo].[Rentals]
+(
+	[EquipmentID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+/****** Объект:  Index [IX_Rentals_RenterID]    Дата создания скрипта: 20.10.2026 9:40:13 ******/ 
+CREATE NONCLUSTERED INDEX [IX_Rentals_RenterID] ON [dbo].[Rentals]
+(
+	[RenterID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+SET ANSI_PADDING ON
+GO
+/****** Объект:  Index [IX_Rentals_Status]    Дата создания скрипта: 20.10.2026 9:40:13 ******/ 
+CREATE NONCLUSTERED INDEX [IX_Rentals_Status] ON [dbo].[Rentals]
+(
+	[Status] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Equipment] ADD  CONSTRAINT [DF_Equipment_IsAvailable]  DEFAULT ((1)) FOR [IsAvailable]
+GO
+ALTER TABLE [dbo].[Rentals] ADD  CONSTRAINT [DF_Rentals_Status]  DEFAULT (N'Pending') FOR [Status]
+GO
+ALTER TABLE [dbo].[Rentals] ADD  CONSTRAINT [DF_Rentals_CreatedAt]  DEFAULT (getdate()) FOR [CreatedAt]
+GO
+ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_Role]  DEFAULT (N'User') FOR [Role]
+GO
+ALTER TABLE [dbo].[Equipment]  WITH CHECK ADD  CONSTRAINT [FK_Equipment_Users] FOREIGN KEY([OwnerID])
+REFERENCES [dbo].[Users] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Equipment] CHECK CONSTRAINT [FK_Equipment_Users]
+GO
+ALTER TABLE [dbo].[Rentals]  WITH CHECK ADD  CONSTRAINT [FK_Rentals_Equipment] FOREIGN KEY([EquipmentID])
+REFERENCES [dbo].[Equipment] ([ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Rentals] CHECK CONSTRAINT [FK_Rentals_Equipment]
+GO
+ALTER TABLE [dbo].[Rentals]  WITH CHECK ADD  CONSTRAINT [FK_Rentals_Renter] FOREIGN KEY([RenterID])
+REFERENCES [dbo].[Users] ([ID])
+GO
+ALTER TABLE [dbo].[Rentals] CHECK CONSTRAINT [FK_Rentals_Renter]
+GO
+ALTER TABLE [dbo].[Equipment]  WITH CHECK ADD  CONSTRAINT [CK_Equipment_Name] CHECK  ((len(ltrim(rtrim([Name])))>=(3)))
+GO
+ALTER TABLE [dbo].[Equipment] CHECK CONSTRAINT [CK_Equipment_Name]
+GO
+ALTER TABLE [dbo].[Equipment]  WITH CHECK ADD  CONSTRAINT [CK_Equipment_Price] CHECK  (([PricePerDay]>(0)))
+GO
+ALTER TABLE [dbo].[Equipment] CHECK CONSTRAINT [CK_Equipment_Price]
+GO
+ALTER TABLE [dbo].[Rentals]  WITH CHECK ADD  CONSTRAINT [CK_Rentals_Dates] CHECK  (([EndDate]>=[StartDate]))
+GO
+ALTER TABLE [dbo].[Rentals] CHECK CONSTRAINT [CK_Rentals_Dates]
+GO
+ALTER TABLE [dbo].[Rentals]  WITH CHECK ADD  CONSTRAINT [CK_Rentals_Status] CHECK  (([Status]=N'Cancelled' OR [Status]=N'Completed' OR [Status]=N'Approved' OR [Status]=N'Pending'))
+GO
+ALTER TABLE [dbo].[Rentals] CHECK CONSTRAINT [CK_Rentals_Status]
+GO
+ALTER TABLE [dbo].[Rentals]  WITH CHECK ADD  CONSTRAINT [CK_Rentals_TotalPrice] CHECK  (([TotalPrice]>=(0)))
+GO
+ALTER TABLE [dbo].[Rentals] CHECK CONSTRAINT [CK_Rentals_TotalPrice]
+GO
+ALTER TABLE [dbo].[Users]  WITH CHECK ADD  CONSTRAINT [CK_Users_FIO] CHECK  ((len(ltrim(rtrim([FIO])))>=(5)))
+GO
+ALTER TABLE [dbo].[Users] CHECK CONSTRAINT [CK_Users_FIO]
+GO
+ALTER TABLE [dbo].[Users]  WITH CHECK ADD  CONSTRAINT [CK_Users_Login] CHECK  ((len(ltrim(rtrim([Login])))>=(3)))
+GO
+ALTER TABLE [dbo].[Users] CHECK CONSTRAINT [CK_Users_Login]
+GO
+ALTER TABLE [dbo].[Users]  WITH CHECK ADD  CONSTRAINT [CK_Users_Role] CHECK  (([Role]=N'Admin' OR [Role]=N'User'))
+GO
+ALTER TABLE [dbo].[Users] CHECK CONSTRAINT [CK_Users_Role]
+GO
+USE [master]
+GO
+ALTER DATABASE [DB_Shirokova_PhotoRental] SET  READ_WRITE 
+GO
